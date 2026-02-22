@@ -76,10 +76,40 @@ mcp-chrome-bridge register
 
 > Note: pnpm v7+ disables postinstall scripts by default for security. The `enable-pre-post-scripts` setting controls whether pre/post install scripts run. If automatic registration fails, use the manual registration command above.
 
-3. **Load Chrome Extension**
+3. **Build the Chrome Extension**
+
+Before loading the extension, you need to build it first:
+
+npm
+
+```bash
+cd /path/to/mcp-chrome
+npm install
+npm run build
+```
+
+pnpm
+
+```bash
+cd /path/to/mcp-chrome
+pnpm install
+pnpm run build
+```
+
+bun
+
+```bash
+cd /path/to/mcp-chrome
+bun install
+bun run build
+```
+
+> This will compile the extension and generate the necessary dist files in `app/chrome-extension/dist/`
+
+4. **Load Chrome Extension**
    - Open Chrome and go to `chrome://extensions/`
    - Enable "Developer mode"
-   - Click "Load unpacked" and select `your/dowloaded/extension/folder`
+   - Click "Load unpacked" and select `your/downloaded/mcp-chrome/app/chrome-extension/dist/` folder (NOT the root folder!)
    - Click the extension icon to open the plugin, then click connect to see the MCP configuration
      <img width="475" alt="Screenshot 2025-06-09 15 52 06" src="https://github.com/user-attachments/assets/241e57b8-c55f-41a4-9188-0367293dc5bc" />
 
@@ -138,7 +168,85 @@ eg：config in augment:
 
 <img width="494" alt="截屏2025-06-22 22 11 25" src="https://github.com/user-attachments/assets/48eefc0c-a257-4d3b-8bbe-d7ff716de2bf" />
 
-## 🛠️ Available Tools
+## � Diagnostics & Troubleshooting
+
+**Something not working?** The browser already tells you exactly what's wrong. Don't guess—**read the error**.
+
+### Step-by-Step Diagnostics
+
+#### 1️⃣ **Extension Won't Load or Connect**
+
+Press **F12** in Chrome → Go to **Console** tab → Look for red errors
+
+**Common error messages and solutions:**
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `worker.js not found in dist/` | Step 3 (Build) was skipped | Run `npm run build` or `pnpm run build` |
+| `Cannot find module 'app/chrome-extension/dist'` | Wrong folder selected in "Load unpacked" | Select `app/chrome-extension/dist/` NOT the root folder |
+| `Extension context invalidated` | Extension code changed but not reloaded | Click the refresh icon next to the extension in `chrome://extensions/` |
+| `Failed to establish connection to native app` | Bridge not registered properly | Run `mcp-chrome-bridge register` in terminal |
+| `EACCES: permission denied` | Node installation permissions issue | Use `sudo npm install -g mcp-chrome-bridge` or use nvm |
+
+#### 2️⃣ **How to Read the Console**
+
+1. Open your MCP client (CherryStudio, etc.)
+2. Ask the extension to do something (e.g., "Take a screenshot")
+3. If it fails → Press **F12** in Chrome
+4. **Console** tab will show:
+   - ❌ Red errors (actual problems)
+   - ⚠️ Yellow warnings (non-critical)
+   - 📝 Blue logs (helpful info)
+
+**Example:**
+```
+❌ Error: worker.js not found
+   at HTMLScriptElement.<anonymous> (background.js:45)
+```
+
+→ **Translation:** The build didn't create `worker.js`. Run `npm run build`.
+
+#### 3️⃣ **Extension Loads but Tools Don't Work**
+
+1. **Check Network Tab** (still in F12)
+   - Click **Network** tab
+   - Try using a tool
+   - Look for failed requests (red items)
+   - Click one → see the error response
+
+2. **Check if Bridge is Running**
+   ```bash
+   # Terminal: is mcp-chrome-bridge listening?
+   lsof -i :12306
+   ```
+   If nothing shows → Start it manually:
+   ```bash
+   mcp-chrome-bridge
+   ```
+
+#### 4️⃣ **Service Worker Errors**
+
+1. Go to `chrome://extensions/`
+2. Find mcp-chrome → Click **"Details"**
+3. Scroll down → Click **"Errors"** link
+4. You'll see **exactly** what broke
+
+### Quick Checklist
+
+- [ ] Did you run `npm run build`? (not just `npm install`)
+- [ ] Are you loading from `app/chrome-extension/dist/` and NOT the root?
+- [ ] Did you click refresh on the extension after changing code?
+- [ ] Is `mcp-chrome-bridge` running? (check with `lsof -i :12306`)
+- [ ] Are you checking **F12 Console** for actual error messages?
+
+### Need More Help?
+
+- **Browser Console** (F12) = Ground truth
+- **Extension Details** (`chrome://extensions/` → Details → Errors) = Service worker problems
+- **Network Tab** (F12 → Network) = Connection issues
+- Don't skip steps, don't reinstall randomly → **read what the error says first**
+
+## �🛠️ Available Tools
 
 Complete tool list: [Complete Tool List](docs/TOOLS.md)
 

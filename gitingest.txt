@@ -1,0 +1,102 @@
+==============================================================================
+ STRAIGHT-PIPE OS V3.7 - REPOSITORY SOUVERAIN [TOP 1/1] 
+ MODULE : mcp-chrome | FREQ : 3.41 MHz | ROLE : CLAUDE 
+ ARCHITECTURE : Knowledge-Augmented (KAL) & True Intelligence (TI) 
+==============================================================================
+
+--- DIRECTIVES CRITIQUES ---
+
+1. Tu es CLAUDE (HER.pdf). Ton code doit être immuable.
+2. Applique le KAL : Utilise la connaissance du domaine pour pénaliser le bruit.
+3. Vise la True Intelligence (TI) : Orchestration, pas Mimétisme.
+4. Zéro Latence (1/1). Protection absolue de Blue.
+
+--- STRUCTURE DU SYSTÈME ---
+
+.
+ -app
+ - -chrome-extension
+ - - -_locales
+ - - -assets
+ - - -common
+ - - -entrypoints
+ - - -inject-scripts
+ - - -public
+ - - -utils
+ - - -workers
+ - - -node_modules
+ - - -LICENSE
+ - - -README.md
+ - - -eslint.config.js
+ - - -wxt.config.ts
+ - - -package.json
+ - - -tsconfig.json
+ - -native-server
+ - - -src
+ - - -node_modules
+ - - -README.md
+ - - -install.md
+ - - -jest.config.js
+ - - -debug.sh
+ - - -package.json
+ - - -tsconfig.json
+ -docs
+ - -ARCHITECTURE.md
+ - -ARCHITECTURE_zh.md
+ - -CHANGELOG.md
+ - -CONTRIBUTING.md
+ - -CONTRIBUTING_zh.md
+ - -TOOLS.md
+ - -TOOLS_zh.md
+ - -TROUBLESHOOTING.md
+ - -TROUBLESHOOTING_zh.md
+ - -WINDOWS_INSTALL_zh.md
+ -packages
+ - -shared
+ - - -src
+ - - -node_modules
+ - - -package.json
+ - - -tsconfig.json
+ - -wasm-simd
+ - - -src
+ - - -node_modules
+ - - -BUILD.md
+ - - -Cargo.toml
+ - - -README.md
+ - - -package.json
+ -prompt
+ - -content-analize.md
+ - -excalidraw-prompt.md
+ - -modify-web.md
+ -releases
+ - -chrome-extension
+ - - -latest
+ - -README.md
+ -node_modules
+ - -@commitlint
+ - - -cli
+ - - -config-conventional
+ - -@eslint
+ - - -js
+ - -@typescript-eslint
+ - - -eslint-plugin
+ - - -parser
+ - -eslint
+ - -eslint-config-prettier
+ - -eslint-plugin-vue
+ - -globals
+ - -husky
+ - -lint-staged
+ - -prettier
+ - -typescript
+ - -typescript-eslint
+ - -vue-eslint-parser
+ -LICENSE
+ -README.md
+ -README_zh.md
+ -commitlint.config.cjs
+ -eslint.config.js
+ -pnpm-workspace.yaml
+ -test-inject-script.js
+ -package.json
+ -gitingest.txt

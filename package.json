@@ -49,5 +49,9 @@
     "**/*.{json,md,yaml,html,css}": [
       "prettier --write"
     ]
-  }
+  },
+  "workspaces": [
+    "app/*",
+    "packages/*"
+  ]
 }
